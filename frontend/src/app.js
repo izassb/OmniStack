@@ -1,9 +1,10 @@
 
-import React from "react"; 
+import React, { useState, useEffect } from "react"; 
 
 import './global.css'; 
-import './app.css'; 
+import './app.css'
 import './sidebar.css'; 
+import './main.css'; 
 
 //{ useState } 
 //useState: funçao criada pelo react p usar um estado
@@ -23,6 +24,29 @@ import './sidebar.css';
 //import Header from "./header";
 
 function App() {
+const [latitude, setLatitude] = useState('');
+const [longitude, setLongitude] = useState('');
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+
+        setLatitude(latitude);
+        setLongitude(longitude);
+      },
+      (err) => {
+        console.log(err);
+      },
+      {
+        timeout: 30000,
+      }
+    )
+    //vetor vazio: funçao executa uma unica vez
+  }, []);
+  //use effect serve para dispararmos uma função toda vez que uma informação alterar 
+  // recebe dois parâmetros: qual funçao executar, quando executar
+  
   //componente: App
 
   //const [counter, setCounter] = useState(0);
@@ -41,25 +65,39 @@ function App() {
       <aside>
         <strong>Cadastrar</strong>
         <form>
-          <div class="input-block">
-            <label htmlFor="github_username">Usuário do Github</label>
+          <div className="input-block">
+            <label htmlFor="">Usuário do Github</label>
             <input name="github_username" id="github_username" required />
           </div>
 
-          <div class="input-block">
-            <label htmlFor="techs">Tecnologias</label>
+          <div className="input-block">
+            <label htmlFor="techs">github_usernameTecnologias</label>
             <input name="techs" id="techs" required />
           </div>
 
           <div className="input-group">
-            <div class="input-block">
+            <div className="input-block">
               <label htmlFor="latitude">Latitude</label>
-              <input name="latitude" id="latitude" required />
+              <input 
+              type="number" 
+              name="latitude" 
+              id="latitude" 
+              required 
+              value={latitude} 
+              onChange={e =>setLatitude(e.target.value)}
+            />
             </div>
 
-            <div class="input-block">
+            <div className="input-block">
               <label htmlFor="longitude">Longitude</label>
-              <input name="longitude" id="longitude" required />
+              <input 
+              type="number" 
+              name="longitude" 
+              id="longitude" 
+              required 
+              value={longitude} 
+              onChange={e =>setLongitude(e.target.value)}
+            />
             </div>
         
           </div>
@@ -68,7 +106,52 @@ function App() {
         </form>
       </aside>
       <main>
-
+        <ul>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars.githubusercontent.com/u/95218427?v=4" alt="Izabelly Santana" />
+              <div className="user-info">
+                <strong>Izabelly Santana</strong>
+                <span>ReactJS, React Native, Node.js</span>
+              </div>
+            </header>
+            <p>Desenvolvedora na @citiupfe. Apaixonada por programação e pelas melhores tecnologias para desenvolvimento web e mobile.</p>
+            <a href="https://github.com/izassb">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars.githubusercontent.com/u/95218427?v=4" alt="Izabelly Santana" />
+              <div className="user-info">
+                <strong>Izabelly Santana</strong>
+                <span>ReactJS, React Native, Node.js</span>
+              </div>
+            </header>
+            <p>Desenvolvedora na @citiupfe. Apaixonada por programação e pelas melhores tecnologias para desenvolvimento web e mobile.</p>
+            <a href="https://github.com/izassb">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars.githubusercontent.com/u/95218427?v=4" alt="Izabelly Santana" />
+              <div className="user-info">
+                <strong>Izabelly Santana</strong>
+                <span>ReactJS, React Native, Node.js</span>
+              </div>
+            </header>
+            <p>Desenvolvedora na @citiupfe. Apaixonada por programação e pelas melhores tecnologias para desenvolvimento web e mobile.</p>
+            <a href="https://github.com/izassb">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars.githubusercontent.com/u/95218427?v=4" alt="Izabelly Santana" />
+              <div className="user-info">
+                <strong>Izabelly Santana</strong>
+                <span>ReactJS, React Native, Node.js</span>
+              </div>
+            </header>
+            <p>Desenvolvedora na @citiupfe. Apaixonada por programação e pelas melhores tecnologias para desenvolvimento web e mobile.</p>
+            <a href="https://github.com/izassb">Acessar perfil no Github</a>
+          </li>
+        </ul>
       </main>
     </div>
 
