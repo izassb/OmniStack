@@ -1,12 +1,12 @@
 //API restful
-
-const { response } = require('express');
 const express = require('express'); 
 //importar express dentro da variável express
 //criação de rotas(express)
 
 const mongoose = require('mongoose');
 //biblioteca que vai dar acesso do node dentro da base de dados mongo
+
+const cors = require('cors');
 
 const routes = require('./routes')
 //importando e puxando arquivo
@@ -19,6 +19,8 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0.0gxl3.mongodb.net/w
 useNewUrlParser: true,
 useUnifiedTopology: true,
 });
+
+app.use(cors());
 
 app.use(express.json());
 //cadastrei dentro do express pra ele entender requisições que tem o corpo no formato json
